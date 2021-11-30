@@ -65,6 +65,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'get_post_Cat':'content.template_tags.get_post_Cat',
+                }
         },
     },
 ]

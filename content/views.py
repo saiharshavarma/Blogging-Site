@@ -4,15 +4,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 def home(request):
+    blogs = BlogPost.objects.all()
     context = {
-        "blogs": BlogPost.objects.all(),
+        "blogs": blogs,
         "tags": {
-        'plant': 'PLANT TALK',
-        'gardening': 'GARDENING DIY\'S',
-        'styling' : 'PLANTS STYLING',
-        'kitchen' : 'KITCHEN GARDENING',
-        'development' : 'SUSTAINABLE DEVELOPEMENT'
-        }
+        'Finance': 'Finance',
+        'Fashion': 'Fashion',
+        'Politics' : 'Politics',
+        'Sports' : 'Sports',
+        'Travel' : 'Travel',
+        'Lifestyle' : 'Lifestyle',
+        'Inspiration' : 'Inspiration',
+        'Environment' : 'Environment',
+        },
+        "blogs_recent": blogs,
+        "blogs_highlight": blogs[0],
+        "blogs_main": blogs[0],
+        "blogs_editor": blogs,
+        "blogs_trending": blogs[0:2],
     }
     return render(request, "blogs/home.html", context)
 
