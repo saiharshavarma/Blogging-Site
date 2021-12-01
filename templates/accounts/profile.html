@@ -8,12 +8,12 @@
     <div class="container-xl">
         <div class="row gy-4 d-flex flex-row flex-nowrap my-5 align-items-center">
             <li class="list-inline-item" style="width: auto;">
-                <img src="{{ request.user.profile.image.url }}" class="author rounded-circle" alt="" style="height: 200px; width: 200px;">
+                <img src="{{ profile_det.image.url }}" class="author rounded-circle" alt="" style="height: 200px; width: 200px;">
             </li>
             <div class="h4 text-dark">
-                <b>Username: </b>{{ user.username }}<br>
-                <b>Name: </b>{{ user.first_name }} {{ user.last_name }}<br>
-                <b>Email: </b>{{ user.email }}<br>
+                <b>Username: </b>{{ user_det.username }}<br>
+                <b>Name: </b>{{ user_det.first_name }} {{ user_det.last_name }}<br>
+                <b>Email: </b>{{ user_det.email }}<br>
             </div>
         </div>
         <div class="row gy-4">

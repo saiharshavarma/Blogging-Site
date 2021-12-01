@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from content.models import BlogPost, Category
+from .models import Profile
 
 def register(request):
     if request.method == 'POST':
@@ -49,8 +50,9 @@ def logout(request):
     return redirect('login')
 
 @login_required(login_url='login')
-def profile(request):
-    user = User.objects.get(username = request.user.username)
+def profile(request, profile_slug):
+    profile = Profile.objects.get(slug = profile_slug)
+    user = User.objects.get(username = profile)
     blogs = BlogPost.objects.filter(author = user)
     context = {
         "blogs": blogs,
@@ -65,5 +67,7 @@ def profile(request):
         'Environment' : 'Environment',
         'Technology' : 'Technology',
         },
+        "profile_det": profile,
+        "user_det": user,
     }
     return render(request, "accounts/profile.html", context)
