@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from content.models import BlogPost, Category
 
 def register(request):
     if request.method == 'POST':
@@ -45,3 +47,23 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def profile(request):
+    user = User.objects.get(username = request.user.username)
+    blogs = BlogPost.objects.filter(author = user)
+    context = {
+        "blogs": blogs,
+        "tags": {
+        'Finance': 'Finance',
+        'Fashion': 'Fashion',
+        'Politics' : 'Politics',
+        'Sports' : 'Sports',
+        'Travel' : 'Travel',
+        'Lifestyle' : 'Lifestyle',
+        'Science' : 'Science',
+        'Environment' : 'Environment',
+        'Technology' : 'Technology',
+        },
+    }
+    return render(request, "accounts/profile.html", context)
