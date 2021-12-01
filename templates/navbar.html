@@ -1,10 +1,9 @@
 {% load static %}
-
 <header class="header-default">
     <nav class="navbar navbar-expand-lg">
         <div class="container-xl">
             <!-- logo  -->
-            <a href="index.html" class="navbar-brand">
+            <a href="{% url 'home' %}" class="navbar-brand">
                 <img src="{% static 'images/logo.png' %}" alt="" style="height: 75px;">
             </a>
 
@@ -12,16 +11,9 @@
                 <ul class="navbar-nav mr-auto">
                    
                     <li class="nav-item active">
-                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="{% url 'home' %}" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item dropdown ">
-                        <a href="#" class="nav-link dropdown-toggle">Blogs</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#" class="dropdown-item">Upload Blog</a>
-                            </li>
-
-                        </ul>
+                        <a href="{% url 'uploading_blogs' %}" class="nav-link">Upload a Blog</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">About Us</a>
@@ -29,36 +21,17 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">Contact Us</a>
                     </li>
-                    <li class="nav-item dropdown ">
-                        <a href="#" class="nav-link dropdown-toggle">Profile</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="login.html" class="dropdown-item">Login</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Sign Up</a>
-                            </li>
-
-                        </ul>
-                    </li>
                 </ul>
             </div>
 
             <!-- right side of header  -->
-            <div class="header-right">
-                <ul class="social-icons list-unstyled list-inline mb-0">
-                    <li class="list-inline-item">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <div class="header-right d-flex">
+                <ul class="navbar-nav collapse navbar-collapse">
+                    <li>
+                        <a href="{% url 'login' %}" class="dropdown-item">Login</a>
                     </li>
-                    <li class="list-inline-item">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#"><i class="fab fa-itunes"></i></a>
-                    </li>
-                   
-                    <li class="list-inline-item">
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    <li>
+                        <a href="{% url 'register' %}" class="dropdown-item">Sign Up</a>
                     </li>
                 </ul>
 
@@ -67,7 +40,7 @@
                     <button class="search icon-button">
                         <i class="icon-magnifier"></i>
                     </button>
-                    <button class="burger-menu icon-button">
+                    <button class="burger-menu icon-button d-inline d-md-none">
                         <span class="burger-icon"></span>
                     </button>
                 </div>
@@ -75,3 +48,39 @@
         </div>
     </nav>
 </header>
+<div class="canvas-menu d-flex align-items-end flex-column">
+    <button class="btn-close" aria-label="Close" type="button"></button>
+
+    <div class="logo">
+        <img src="images/logo.svg" alt="">
+    </div>
+    <nav>
+        <ul class="vertical-menu">
+            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'uploading_blogs' %}">Upload a Blog</a></li>
+            <li><a href="{% url 'home' %}">About Us</a></li>
+            <li><a href="{% url 'home' %}">Contact</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+        </ul>
+    </nav>
+</div>
+<!-- search pop up  -->
+<div class="search-popup">
+    <button class="btn-close" aria-label="Close" type="button"></button>
+
+    <div class="search-content">
+        <div class="text-center">
+            <h3 class="mb-4 mt-0">Press ESC to close</h3>
+        </div>
+
+        <form action="" method="POST" class="d-flex search-form">
+            {% csrf_token %}
+            <input type="search" placeholder="Search and press enter ..." aria-label="Search"
+                class="form-control me-2" name="search_keyword">
+            <button class="btn btn-default btn-lg" type="submit">
+                <i class="icon-magnifier"></i>
+            </button>
+        </form>
+    </div>
+</div>

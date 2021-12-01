@@ -25,7 +25,7 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.blog_title
-
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.blog_title, allow_unicode=True)
         super().save(*args, **kwargs)

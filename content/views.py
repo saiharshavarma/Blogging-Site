@@ -2,11 +2,22 @@ from django.shortcuts import render, redirect
 from .models import BlogPost, Category
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import random
 
 def home(request):
-    blogs = BlogPost.objects.all()
+    blogs_search = []
+    if request.method == 'POST':
+        search_keyword = request.POST.get('search_keyword')
+        blogs_search = BlogPost.objects.filter(blog_title__icontains = search_keyword)
+    blogs = list(BlogPost.objects.all())
+    blogs_main = random.sample(blogs, len(blogs))
+    blogs_recent = BlogPost.objects.all().order_by('-publish_date')[:4]
+    blogs_popular = random.sample(blogs_main, len(blogs_main))[:4]
+    blogs_editor = random.sample(blogs_popular, len(blogs_popular))[:4]
+    if blogs_search != []:
+        blogs_main = blogs_search
     context = {
-        "blogs": blogs,
+        "blogs": blogs_main,
         "tags": {
         'Finance': 'Finance',
         'Fashion': 'Fashion',
@@ -14,14 +25,13 @@ def home(request):
         'Sports' : 'Sports',
         'Travel' : 'Travel',
         'Lifestyle' : 'Lifestyle',
-        'Inspiration' : 'Inspiration',
+        'Science' : 'Science',
         'Environment' : 'Environment',
+        'Technology' : 'Technology',
         },
-        "blogs_recent": blogs,
-        "blogs_highlight": blogs[0],
-        "blogs_main": blogs[0],
-        "blogs_editor": blogs,
-        "blogs_trending": blogs[0:2],
+        "blogs_popular": blogs_popular,
+        "blogs_recent": blogs_recent,
+        "blogs_editor": blogs_editor,
     }
     return render(request, "blogs/home.html", context)
 
