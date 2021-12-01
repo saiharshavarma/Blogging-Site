@@ -60,6 +60,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -125,6 +128,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -191,6 +197,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -257,6 +266,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -323,6 +335,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -389,6 +404,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -455,6 +473,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -521,6 +542,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -587,6 +611,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
@@ -653,6 +680,9 @@
                                             {{ tags|get_post_Cat:blog.category}}</a>
                                         </li>
                                         <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        {% if user.username == user_det.username %}
+                                        <li class="list-inline-item"><a class="btn btn-danger text-white btn-sm" href="{% url 'blog_delete' the_slug=blog.slug %}">Delete</a></li>
+                                        {% endif %}
                                     </ul>
                                     <h5 class="post-tile">
                                         <a href="{% url 'blog_details' the_slug=blog.slug %}">
