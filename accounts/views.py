@@ -71,9 +71,3 @@ def profile(request, profile_slug):
         "user_det": user,
     }
     return render(request, "accounts/profile.html", context)
-
-
-@login_required(login_url='login')
-def blog_delete(request, the_slug):
-    BlogPost.objects.filter(slug=the_slug).delete()
-    redirect('home')

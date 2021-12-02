@@ -309,11 +309,9 @@ section {
 }
 
 .lds-dual-ring {
-    display: inline-block;
-    position: absolute;
-    right: 40px;
-    height: 40px;
-    top: 50%;
+    position: fixed;
+    height: 200px;
+    top: 75%;
     left: 50%;
     visibility: hidden;
     opacity: 0;
@@ -895,6 +893,13 @@ section {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+}
+
+.delete_messages{
+    background-color: green;
+    color: white !important;
+    text-align: center !important;
+    width: fit-content !important;
 }
 
 /* *********** */

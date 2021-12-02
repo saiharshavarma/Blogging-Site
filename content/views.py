@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import BlogPost, Category
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import random
 
 def home(request):
@@ -56,3 +57,9 @@ def blog_upload(request):
 def blog_details(request, the_slug):
     blog = BlogPost.objects.filter(slug=the_slug)
     return render(request, 'blogs/blog_details.html', {'blog': blog[0]})
+
+@login_required(login_url='login')
+def blog_delete(request, the_slug):
+    BlogPost.objects.filter(slug=the_slug).delete()
+    messages.info(request, 'Blog Deleted Successfully')
+    return redirect('home')
