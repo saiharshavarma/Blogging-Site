@@ -9,6 +9,7 @@ def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
+        image = request.FILES.get('profile_pic')
         username = request.POST['username']
         email = request.POST['email']
         password1 = request.POST['password']
@@ -22,7 +23,9 @@ def register(request):
                 return redirect('register')
             else:
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password = password1)
+                profile = Profile.objects.create(user = user, image = image)
                 user.save()
+                profile.save()
                 return redirect('login')
         else:
             messages.info(request, 'Passwords are not matching')

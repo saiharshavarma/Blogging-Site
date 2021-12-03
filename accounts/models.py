@@ -5,8 +5,8 @@ from django.utils.text import slugify
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default = 'default.jpg', upload_to = 'profile_pics')
-    slug = models.SlugField(max_length=264, unique=True, editable=False)
+    image = models.ImageField(upload_to = 'profile_pics', null=True)
+    slug = models.SlugField(max_length=264, unique=True, editable=False, default='')
 
     def __str__(self):
         return f'{self.user.username}'
