@@ -28,12 +28,21 @@
             <!-- right side of header  -->
             <div class="header-right d-flex">
                 <ul class="navbar-nav collapse navbar-collapse">
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile' profile_slug=user.profile.slug %}" class="dropdown-item">{{ user }}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                    </li>
+                    {% else %}
                     <li>
                         <a href="{% url 'login' %}" class="dropdown-item">Login</a>
                     </li>
                     <li>
                         <a href="{% url 'register' %}" class="dropdown-item">Sign Up</a>
                     </li>
+                    {% endif %}
                 </ul>
 
                 <!-- buttons  -->
