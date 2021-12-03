@@ -71,3 +71,6 @@ def profile(request, profile_slug):
         "user_det": user,
     }
     return render(request, "accounts/profile.html", context)
+
+def our_team(request):
+    return render(request, "our_team.html")
