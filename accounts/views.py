@@ -86,6 +86,7 @@ def contact(request):
         message = request.POST['message']
         messages = Contact.objects.create(name=name, email=email, phone=phone, message=message)
         messages.save()
+        messages.info(request, 'Message sent successfully. Thank you for writing to us.')
         return render(request, 'contact.html')
     else:
         return render(request, 'contact.html')

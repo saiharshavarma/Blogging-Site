@@ -1,38 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');
 
-body{
-    background: linear-gradient(148.46deg, #898df3, #C3B1E1, #E0B0FF, #898df3);    
+.bg-img {
+    background: url('https://st2.depositphotos.com/1420973/6409/i/600/depositphotos_64095317-stock-photo-blog-concept-cloud-chart-print.jpg');
     background-size: cover;
     background-position: center;
+    justify-content: center;
 }
 
-.bg-img {
-    justify-content: center;    
+.bg-img:after {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .content {
     z-index: 999;
     text-align: center;
     padding: 60px 32px;
-    width: 370px;
-    box-shadow: 0px 4px 10px 0px #9378a5;
-    background: linear-gradient(150.46deg,
-            rgba(255, 255, 255, 0.5) -12.61%,
-            rgba(255, 255, 255, 0.25) 110.1%);
-    padding: 20px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
 }
 
 .content header {
     color: black;
     font-size: 33px;
-    font-weight: 800;
+    font-weight: 600;
     margin: 0 0 35px 0;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.lheading{
-    color: #9911d3 !important;
 }
 
 .field {
@@ -40,7 +33,7 @@ body{
     height: 45px;
     width: 100%;
     display: flex;
-    background: rgba(255, 255, 255, 0.0);
+    background: rgba(255, 255, 255, 0.94);
 }
 
 .field span {
@@ -52,13 +45,12 @@ body{
 .field input {
     height: 100%;
     width: 100%;
-    background: #fff;
+    background: transparent;
     border: none;
     outline: none;
     color: #222;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    border-radius: 10px;
 }
 
 .space {
@@ -66,14 +58,12 @@ body{
 }
 
 .show {
-    position: absolute;
     right: 13px;
     font-size: 13px;
     font-weight: 700;
     color: #222;
     display: none;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .pass-key:valid~.show {
@@ -97,12 +87,12 @@ body{
 
 .field input[type="submit"] {
     background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
-    color: white;
+    border: 1px solid black;
+    color: black;
     font-size: 18px;
     letter-spacing: 1px;
     font-weight: 600;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .field input[type="submit"]:hover {
@@ -129,7 +119,6 @@ body{
     height: 45px;
     line-height: 45px;
     margin-left: 10px;
-    border-radius: 10px;
 }
 
 .facebook {
@@ -165,7 +154,7 @@ i span {
 
 .signup {
     font-size: 15px;
-    color: black;
+    color: white;
     font-family: 'Poppins', sans-serif;
 }
 
