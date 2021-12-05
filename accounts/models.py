@@ -14,3 +14,9 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.user.username, allow_unicode=True)
         super().save(*args, **kwargs)
+
+class Contact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    phone = models.IntegerField()
+    message = models.TextField()

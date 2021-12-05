@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from content.models import BlogPost, Category
-from .models import Profile
+from .models import Profile, Contact
 
 def register(request):
     if request.method == 'POST':
@@ -77,3 +77,15 @@ def profile(request, profile_slug):
 
 def our_team(request):
     return render(request, "our_team.html")
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        message = request.POST['message']
+        messages = Contact.objects.create(name=name, email=email, phone=phone, message=message)
+        messages.save()
+        return render(request, 'contact.html')
+    else:
+        return render(request, 'contact.html')
