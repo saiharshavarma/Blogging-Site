@@ -1,27 +1,154 @@
-{% extends "base.html" %} 
-{% load static %}
+{% extends "base.html" %}
 {% load get_post_Cat %}
-{% block content %}
+{% load static %}
 
-<section id="blog-article">
-        <div class="article-container">
-            <div class="heading">
-                <h2>{{ blog.blog_title }}</h2>
+{% block content %}
+<title>Blogophilic Panda | {{ blog_single.blog_title }}</title>
+<link rel="stylesheet" href="{% static 'css/blogs/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/blogs/blog_details.css' %}">
+{% for message in messages %}
+<script>    
+    alert("{{message}}");    
+</script>
+{% endfor %}
+<section id="hero">
+    <div class="container-xl">
+        <div class="row gy-4">
+            <div class="col-lg-8">
+                <div class="post-tabs rounded bordered">
+                    <div class="article-container">
+                        {{ blog_single.publish_date|date:"d M Y" }}
+                        <div class="heading">
+                            <h2>{{ blog_single.blog_title }}</h2>
+                        </div>
+                        <div class="author">
+                            <img src="{{ blog_single.author.profile.image.url }}" class="authorpic" alt="">
+                            <h5>Author: <a href="{% url 'profile' profile_slug=blog_single.author.profile.slug %}">{{ blog_single.author }}</a></h5>
+                        </div>
+                        <div class="article-image">
+                            <img src="/media/{{ blog_single.blog_image }}">
+                        </div>
+                        <br>
+                        <div class="article-text">
+                            {{ blog_single.blog_content|linebreaks }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr style="width: 50%; margin: 0 auto 5px auto;">
-            <div class="author">
-                ~<b>{{ blog.author }}</b>
-            </div>
-            <div class="article-image">
-                <img src="/media/{{ blog.blog_image }}">
-            </div>
-            <br>
-            <div class="article-text">
-                      {{ blog.blog_content|linebreaks }}
+            <div class="col-lg-4">
+                <div class="sidebar">   
+                    {% if author_blogs|length > 0 %}                 
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">Check out other Blogs by <a href="{% url 'profile' profile_slug=blog_single.author.profile.slug %}">{{ blog_single.author }}</a></h3>
+                        </div>
+                        <div class="widget-content">
+                            {% for blog in author_blogs %}
+                            <div class="post post-list-sm circle">
+                                <div class="thumb circle">
+                                    <a href="{% url 'blog_details' the_slug=blog.slug %}">
+                                        <div class="inner">
+                                            <img src="/media/{{ blog.blog_image }}" alt="" style="height: 100%; width: 100%;">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="details clearfix">
+                                    <h6 class="post-title my-0">
+                                        <a href="{% url 'blog_details' the_slug=blog.slug %}">{{ blog.blog_title }}</a>
+                                    </h6>
+                                    <ul class="meta list-inline mt-1 mb-0">
+                                        <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="widget rounded">
+                        <ul class="nav nav-tabs nav-pills nav-fill" id="postTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button aria-controls="popular" aria-selected="true" class="nav-link active"
+                                    data-bs-target="#popular" data-bs-toggle="tab" id="popular-tab" role="tab"
+                                    type="button">
+                                    Popular
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button aria-controls="latest" aria-selected="false" class="nav-link"
+                                    data-bs-target="#latest" data-bs-toggle="tab" id="latest-tab" role="tab"
+                                    type="button">
+                                    Latest
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- content  -->
+                        <div class="tab-content" id="postsTabContent">
+                            <!-- loader -->
+                            <div class="lds-dual-ring"></div>
+                            <!-- pop post  -->
+
+                            <div class="tab-pane fade show active" id="popular" aria-labelledby="popular-tab"
+                                role="tabpanel">
+                                <!-- post  -->
+                                {% for blog in blogs_popular %}
+                                <div class="post post-list-sm circle">
+                                    <div class="thumb circle">
+                                        <a href="{% url 'blog_details' the_slug=blog.slug %}">
+                                            <div class="inner">
+                                                <img src="/media/{{ blog.blog_image }}" alt="" style="height: 100%; width: 100%;">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0">
+                                            <a href="{% url 'blog_details' the_slug=blog.slug %}">{{ blog.blog_title }}</a>
+                                        </h6>
+                                        <ul class="meta list-inline mt-1 mb-0">
+                                            <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- latest  -->
+                            <div class="tab-pane fade" id="latest" aria-labelledby="latest-tab" role="tabpanel">
+                                <!-- post -->
+                                {% for blog in blogs_latest %}
+                                <div class="post post-list-sm circle">
+                                    <div class="thumb circle">
+                                        <a href="{% url 'blog_details' the_slug=blog.slug %}">
+                                            <div class="inner">
+                                                <img src="/media/{{ blog.blog_image }}" alt="" style="height: 100%; width: 100%;">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="details clearfix">
+                                        <h6 class="post-title my-0">
+                                            <a href="{% url 'blog_details' the_slug=blog.slug %}">{{ blog.blog_title }}</a>
+                                        </h6>
+                                        <ul class="meta list-inline mt-1 mb-0">
+                                            <li class="list-inline-item">{{ blog.publish_date|date:"D, d M Y" }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+<script src="{% static 'js/home.js' %}"></script>
 
 {% endblock content %}

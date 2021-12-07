@@ -1,0 +1,30 @@
+.heading h2{
+    margin-bottom: 5px;
+}
+
+.author{
+    display: flex;
+    align-items: center;
+}
+
+.authorpic{
+    border-radius: 50%;
+    height: 50px; 
+    width: 50px;
+    margin-right: 10px;
+}
+
+.article-text p{
+    color: black;
+}
+
+.article-image{    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.article-image img{
+    width: 100%;
+}

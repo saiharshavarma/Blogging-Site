@@ -162,7 +162,7 @@ transition: 0.2s all ease-in-out;
 .our_team .row {
   --bs-gutter-x: 0;
   width: 100vw;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .our_team .container h1 {

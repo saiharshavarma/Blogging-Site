@@ -9,10 +9,14 @@ def home(request):
     blogs_search = []
     if request.method == 'POST':
         search_keyword = request.POST.get('search_keyword')
-        blogs_search = BlogPost.objects.filter(blog_title__icontains = search_keyword)
+        blogs_search_part1 = list(BlogPost.objects.filter(blog_title__icontains = search_keyword))
+        user = User.objects.filter(username = search_keyword)[:1]
+        blogs_search_part2 = list(BlogPost.objects.filter(author = user))
+        blogs_search_part3 = list(BlogPost.objects.filter(blog_content__icontains = search_keyword).exclude(blog_title__icontains = search_keyword))
+        blogs_search = blogs_search_part1 + blogs_search_part2 + blogs_search_part3
     blogs = list(BlogPost.objects.all())
     blogs_main = random.sample(blogs, len(blogs))
-    blogs_recent = BlogPost.objects.all().order_by('-publish_date')[:4]
+    blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
     blogs_popular = random.sample(blogs_main, len(blogs_main))[:4]
     blogs_editor = random.sample(blogs_popular, len(blogs_popular))[:4]
     if blogs_search != []:
@@ -31,7 +35,7 @@ def home(request):
         'Technology' : 'Technology',
         },
         "blogs_popular": blogs_popular,
-        "blogs_recent": blogs_recent,
+        "blogs_latest": blogs_latest,
         "blogs_editor": blogs_editor,
     }
     return render(request, "blogs/home.html", context)
@@ -55,8 +59,18 @@ def blog_upload(request):
 
 @login_required(login_url='login')
 def blog_details(request, the_slug):
-    blog = BlogPost.objects.filter(slug=the_slug)
-    return render(request, 'blogs/blog_details.html', {'blog': blog[0]})
+    blog_single = BlogPost.objects.get(slug=the_slug)
+    blogs = list(BlogPost.objects.all())
+    author_blogs = list(BlogPost.objects.filter(author = blog_single.author).exclude(slug=the_slug))[:4]
+    blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
+    blogs_popular = random.sample(blogs, len(blogs))[:4]
+    context = {
+        "blog_single": blog_single,
+        "author_blogs": author_blogs,
+        "blogs_popular": blogs_popular,
+        "blogs_latest": blogs_latest,
+    }
+    return render(request, 'blogs/blog_details.html', context)
 
 @login_required(login_url='login')
 def blog_delete(request, the_slug):

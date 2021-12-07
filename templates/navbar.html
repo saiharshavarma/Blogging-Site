@@ -84,7 +84,7 @@
             <h3 class="mb-4 mt-0">Press ESC to close</h3>
         </div>
 
-        <form action="" method="POST" class="d-flex search-form">
+        <form action="{% url 'home' %}" method="POST" class="d-flex search-form">
             {% csrf_token %}
             <input type="search" placeholder="Search and press enter ..." aria-label="Search"
                 class="form-control me-2" name="search_keyword">
