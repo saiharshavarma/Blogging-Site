@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import BlogPost, Category
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 import random
 
 def home(request):
@@ -60,12 +62,18 @@ def blog_upload(request):
 @login_required(login_url='login')
 def blog_details(request, the_slug):
     blog_single = BlogPost.objects.get(slug=the_slug)
+    total_likes = blog_single.total_likes()
+    liked = False
+    if blog_single.likes.filter(id = request.user.id):
+        liked = True
     blogs = list(BlogPost.objects.all())
     author_blogs = list(BlogPost.objects.filter(author = blog_single.author).exclude(slug=the_slug))[:4]
     blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
     blogs_popular = random.sample(blogs, len(blogs))[:4]
     context = {
         "blog_single": blog_single,
+        "blog_likes": total_likes,
+        "blog_liked": liked,
         "author_blogs": author_blogs,
         "blogs_popular": blogs_popular,
         "blogs_latest": blogs_latest,
@@ -77,3 +85,16 @@ def blog_delete(request, the_slug):
     BlogPost.objects.filter(slug=the_slug).delete()
     messages.info(request, 'Blog Deleted Successfully')
     return redirect('home')
+
+@login_required(login_url='login')
+def blog_like(request, the_slug):
+    blogtitle = request.POST.get('blog_title')
+    blog = BlogPost.objects.get(blog_title=blogtitle)
+    liked = False
+    if blog.likes.filter(id = request.user.id).exists():
+        blog.likes.remove(request.user)
+        liked = False
+    else:
+        blog.likes.add(request.user) 
+        liked = True
+    return HttpResponseRedirect(reverse('blog_details', args=[the_slug]))
