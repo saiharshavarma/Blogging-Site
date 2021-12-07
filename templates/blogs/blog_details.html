@@ -30,7 +30,12 @@
                         </div>
                         <br>
                         <div class="article-text">
+                            {% if user.is_authenticated %}
                             {{ blog_single.blog_content|linebreaks }}
+                            {% else %}
+                            {{ blog_single.blog_content|slice:":300" }}...
+                            <a href="{% url 'login' %}">Read more</a>
+                            {% endif %}
                         </div>
                         <form action="{% url 'like_blog' the_slug=blog_single.slug %}" method="POST">
                             {% csrf_token %}

@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import BlogPost, Category
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 import random
 
 def home(request):
@@ -59,7 +59,6 @@ def blog_upload(request):
     else:
         return render(request, 'blogs/blog_upload.html')
 
-@login_required(login_url='login')
 def blog_details(request, the_slug):
     blog_single = BlogPost.objects.get(slug=the_slug)
     total_likes = blog_single.total_likes()
