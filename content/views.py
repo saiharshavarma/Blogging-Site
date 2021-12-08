@@ -49,7 +49,7 @@ def blog_upload(request):
             author = User.objects.get(username = request.user.username)
             blog_title = request.POST['blog_title']
             blog_content = request.POST['blog_content']
-            blog_image = request.FILES['blog_image']
+            blog_image = request.FILES.get('blog_image')
             category = Category.objects.get(category = request.POST['category'])
             blog = BlogPost.objects.create(author=author, blog_title=blog_title, blog_content=blog_content, blog_image=blog_image, category=category)
             blog.save()
