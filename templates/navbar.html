@@ -1,6 +1,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 <header class="header-default">
+    
     <nav class="navbar navbar-expand-lg">
         <div class="container-xl">
             <!-- logo  -->
@@ -12,8 +14,9 @@
                 <ul class="navbar-nav mr-auto">
                    
                     <li class="nav-item ">
-                        <a href="{% url 'home' %}" class="nav-link">Home</a>
+                        <a href="{% url 'home' %}" class="nav-link ">Home</a>
                     </li>
+                    <li class="nav-item">
                         <a href="{% url 'uploading_blogs' %}" class="nav-link">Upload a Blog</a>
                     </li>
                     <li class="nav-item">
@@ -94,3 +97,10 @@
         </form>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+  $('nav-link.active').removeClass('active');
+  $('a[href="' + location.pathname + '"]').closest('.nav-link').addClass('active'); 
+});
+</script>
