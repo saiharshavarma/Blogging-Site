@@ -21,8 +21,8 @@ def home(request):
     blogs = list(BlogPost.objects.all())
     blogs_main = random.sample(blogs, len(blogs))
     blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
-    blogs_popular = random.sample(blogs_main, len(blogs_main))[:4]
-    blogs_editor = random.sample(blogs_popular, len(blogs_popular))[:4]
+    blogs_popular = (sorted(blogs, key = lambda x: x.total_likes())[::-1])[:4]
+    blogs_editor = random.sample(blogs_main, len(blogs_main))[:4]
     if blogs_search != []:
         blogs_main = blogs_search
     context = {
@@ -71,7 +71,7 @@ def blog_details(request, the_slug):
     blogs = list(BlogPost.objects.all())
     author_blogs = list(BlogPost.objects.filter(author = blog_single.author).exclude(slug=the_slug))[:4]
     blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
-    blogs_popular = random.sample(blogs, len(blogs))[:4]
+    blogs_popular = (sorted(blogs, key = lambda x: x.total_likes())[::-1])[:4]
     context = {
         "blog_single": blog_single,
         "blog_likes": total_likes,
