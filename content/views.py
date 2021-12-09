@@ -16,6 +16,8 @@ def home(request):
         blogs_search_part2 = list(BlogPost.objects.filter(author = user))
         blogs_search_part3 = list(BlogPost.objects.filter(blog_content__icontains = search_keyword).exclude(blog_title__icontains = search_keyword))
         blogs_search = blogs_search_part1 + blogs_search_part2 + blogs_search_part3
+        if blogs_search == []:
+            messages.info(request, 'No Results Found')
     blogs = list(BlogPost.objects.all())
     blogs_main = random.sample(blogs, len(blogs))
     blogs_latest = BlogPost.objects.all().order_by('-publish_date')[:4]
