@@ -1,4 +1,3 @@
-
 .site-wrapper .main-overlay {
     opacity: 0;
     visibility: hidden;
@@ -63,7 +62,10 @@ body.down .header-default.clone {
 }
 
 .navbar-nav .nav-link:hover {
-    color: #203656;
+    background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
+    border-radius: 25px;
+    color: white;
+    background-color: #6e72fc;
 }
 
 .navbar-nav li.active .nav-link {
