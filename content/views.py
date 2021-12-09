@@ -53,7 +53,8 @@ def blog_upload(request):
             category = Category.objects.get(category = request.POST['category'])
             blog = BlogPost.objects.create(author=author, blog_title=blog_title, blog_content=blog_content, blog_image=blog_image, category=category)
             blog.save()
-            return render(request, 'blogs/blog_upload.html')
+            messages.info(request, 'Blog Uploaded Successfully')
+            return redirect('home')
         else:
             return redirect('login')
     else:
